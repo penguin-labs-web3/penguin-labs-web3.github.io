@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Illumination NYC Passes - Powered By Penguin Labs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="./scripts.js"></script>
+</head>
+
+<body>
+	<h1> Click Here To Get Your Passes! </h1>
+	<button id="btn-connect" type="button" class="btn" onclick="connectMetamask()">Connect Metamask Wallet</button>
+    <br>
+    <span id="wallet-info" display="none">Detected Wallet Address is: </span>
+    <br>
+    <div class="quantity">
+        <a href="#" class="quantity__minus" onclick="clickMinus(); return false;"><span class="quantity_text">-</span></a>
+        <input name="quantity" type="text" class="quantity__input" value="1">
+        <a href="#" class="quantity__plus" onclick="clickPlus(); return false;"><span class="quantity_text">+</span></a>
+    </div>
+    <h3 id="supply">(loading)/5555 Passes have been minted.</h3>
+</body>
+</html>
