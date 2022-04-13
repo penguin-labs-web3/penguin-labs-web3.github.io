@@ -1,7 +1,7 @@
 var currentAccount = "";
 
 const CONTRACT_ADDRESS = '0xaaB430F524Dc07C83d83B2918dF5cA6AEd4F5468'; // TODO: UPDATE
-const ALLOWED_CHAIN = "0x4"; // TODO: change back to 0x1
+const ALLOWED_CHAIN = "0x1"; // TODO: change back to 0x1
 const QUANTITY_TO_PRICE = {
     1:  "0xb1a2bc2ec50000",  // .05 (50000000000000000)
     2:  "0x16345785D8A0000",
@@ -64,7 +64,7 @@ function doActualSetup(){
             console.error(err);
         });
         ethereum.on('chainChanged', chainChanged);
-        setInterval(updateTotalSupply, 5000);
+        setInterval(updateTotalSupply, 3000);
     }
 }
 
@@ -113,18 +113,19 @@ function accountsChanged(accounts) {
         // MetaMask is locked or the user has not connected any accounts
         // disable minting and enable connecting
         document.querySelector('#btn-connect').innerText = "Connect Metamask Wallet";
-        document.querySelector('#wallet-info').style.display = "none";
+        // document.querySelector('#wallet-info').style.display = "none";
         document.querySelector('.quantity').style.display = "none";
-        document.querySelector('#chain-info').style.display = "none";
         $('#btn-connect').prop("disabled", false);
         document.querySelector('#btn-connect').onclick = connectMetamask;
     } else if (accounts[0] !== currentAccount) {
         currentAccount = accounts[0];
+        console.log(currentAccount);
+        console.log(accounts);
         // disable connecting and enable minting
         document.querySelector('#btn-connect').innerText = "Click To Mint";
         // unhide 
-        document.querySelector('#wallet-info').innerText = "Detected Wallet Address is: " + currentAccount;
-        document.querySelector('#wallet-info').style.display = "inline-block";
+        // document.querySelector('#wallet-info').innerText = "Detected Wallet Address is: " + currentAccount;
+        // document.querySelector('#wallet-info').style.display = "inline-block";
         document.querySelector('.quantity').style.display = "flex";
         document.querySelector('#btn-connect').onclick = mint;
 
@@ -146,16 +147,20 @@ function chainChanged(chainId) {
 
 function updateTotalSupply() {
     var minted = "0";
-    ethereum.request({method: 'eth_call', params:[{to:CONTRACT_ADDRESS, data:TOTAL_SUPPLY_ABI}, "latest"]}).then((data) => {
-        minted = parseInt(data, 16)-1;
-        if (minted < 0) {
-            minted = 0;
+    ethereum.request({ method: 'eth_chainId' }).then((chainId) => {
+        if (chainId != ALLOWED_CHAIN) {
+            var text = "Unable to load number of remaining memberships due to connected wallet not being configured for the Ethereum Mainnet.";
+            document.querySelector("#supply").innerText = text;
+        } else {
+            ethereum.request({method: 'eth_call', params:[{to:CONTRACT_ADDRESS, data:TOTAL_SUPPLY_ABI}, "latest"]}).then((data) => {
+                minted = parseInt(data, 16)-1;
+                if (minted < 0) {
+                    minted = 0;
+                }
+                var text = (5555-minted) + "/5555 Memberships Left.";
+                document.querySelector("#supply").innerText = text;
+            });
         }
-        var text = minted + "/5555 Passes have been minted.";
-        if (minted == 5555) {
-            text += " Sorry that you missed the sale, but if you head over to OpenSea, you can get your pass on the secondary!"
-        }
-        document.querySelector("#supply").innerText = text;
     });
 }
 
