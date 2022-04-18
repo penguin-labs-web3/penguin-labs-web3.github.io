@@ -2,23 +2,33 @@
     padding: auto;
     margin: auto;
     font-family: 'Roboto', sans-serif;
+    letter-spacing: .15em;
+    font-weight: normal;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     height: 100%;
     text-align: center;
-    color: white;
+    color: rgba(250,250,250,.85);
     background-color: black;
 }
 
 .btn {
-    color: white;
-	background-color: #f930d6;
+    border: 2px solid black;
+    background-color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-color: #A07AE2;
+    color: #A07AE2;
+    transition: 0.7s;
 }
 
 .btn:hover {
-    color: blue;
+    color: white;
+    background-color: #A07AE2;
 }
 
 

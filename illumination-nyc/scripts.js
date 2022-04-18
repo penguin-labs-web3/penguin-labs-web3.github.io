@@ -1,7 +1,7 @@
 var currentAccount = "";
 
-const CONTRACT_ADDRESS = '0xaaB430F524Dc07C83d83B2918dF5cA6AEd4F5468'; // TODO: UPDATE
-const ALLOWED_CHAIN = "0x1"; // TODO: change back to 0x1
+const CONTRACT_ADDRESS = '0xaaB430F524Dc07C83d83B2918dF5cA6AEd4F5468'; 
+const ALLOWED_CHAIN = "0x1"; 
 const QUANTITY_TO_PRICE = {
     1:  "0xb1a2bc2ec50000",  // .05 (50000000000000000)
     2:  "0x16345785D8A0000",
@@ -157,7 +157,7 @@ function updateTotalSupply() {
                 if (minted < 0) {
                     minted = 0;
                 }
-                var text = (5555-minted) + "/5555 Memberships Left.";
+                var text = (5555-minted).toLocaleString('en-US') + "/5,555 Memberships Remaining.";
                 document.querySelector("#supply").innerText = text;
             });
         }
